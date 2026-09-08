@@ -1,5 +1,7 @@
 # Chrome 웹 스토어 제출 자료
 
+현재 검증 결과와 제출 ZIP의 SHA-256은 [검증 및 배포 상태](release-status.md)에 기록합니다. 스토어 업로드·심사 제출·공개 게시는 아직 완료하지 않았습니다.
+
 ## 기본 정보
 
 - 이름: Tab Harbor - 탭 보관함
@@ -24,22 +26,22 @@ Tab Harbor는 현재 탭이나 창의 탭들을 이름 있는 묶음으로 저�
 
 URL을 보관하고 다시 여는 기능이며, 페이지 본문·폼 입력·로그인·스크롤 상태를 저장하지 않습니다. HTTP/HTTPS 주소를 지원합니다. 확장 프로그램이나 Chrome 프로필을 삭제하기 전에는 필요한 기록을 백업하세요.
 
-## 개인정보 탭 초안 — 실제 구현 확인 후 입력
+## 개인정보 탭 입력안
 
 - 단일 목적: 사용자가 선택한 Chrome 탭·URL 묶음을 보관·검색하고 나중에 다시 여는 기능.
 - tabs 권한 사유: 저장 버튼을 누른 사용자가 선택한 현재 탭 또는 현재 창의 URL·제목·순서·고정 여부를 읽고 보관된 URL을 다시 열기 위해 사용합니다.
 - 원격 코드: 사용하지 않습니다. 확장의 JavaScript는 배포 ZIP에 포함됩니다.
 - 처리 정보: 사용자가 저장한 URL과 제목 등 웹 방문 관련 정보, 사용자가 입력한 메모·태그. 서버 전송이나 판매는 없습니다. 대시보드의 데이터 유형 정의에 맞게 사실대로 표시합니다.
-- 개인정보처리방침: 공개 URL 게시 및 접근 확인 필요. `docs/privacy.md`가 원고입니다.
+- 개인정보처리방침: [공개 페이지](https://tab-harbor.junghuncha40.chatgpt.site). 원고는 `docs/privacy.md`입니다. 공개 설정과 배포 완료 및 실제 Chrome에서 페이지 열기를 확인했습니다.
 
 ## 제출 전 확인
 
 - [ ] 실제 로드한 확장에서 저장·재시작·복원 및 실패 시 보존 검증
 - [ ] 개발자 계정, 2단계 인증, 등록·연락처 검증 완료
-- [ ] 개인정보처리방침 공개 URL 확인
+- [x] 개인정보처리방침 공개 페이지 배포 및 실제 Chrome 열기 확인
 - [ ] 실제 기능 스크린샷 1~5장(1280×800 또는 640×400)
-- [ ] 128×128 아이콘 및 440×280 소형 홍보 이미지
-- [ ] 테스트와 패키지 검사 통과, 제출 ZIP SHA-256 기록
+- [x] 128×128 아이콘 및 440×280 소형 홍보 이미지
+- [x] 자동 테스트 34개와 패키지 검사 통과, 제출 ZIP SHA-256 기록
 - [ ] 스토어 항목 업로드, 필수 항목 검증, 심사 제출
 - [ ] 심사 결과와 공개 게시 URL 확인
 
@@ -52,4 +54,4 @@ URL을 보관하고 다시 여는 기능이며, 페이지 본문·폼 입력·�
 5. 묶음 전체와 개별 URL을 다시 열어 주소를 확인합니다.
 6. JSON 백업을 내보내고 다시 가져옵니다. 동일 ID 기록이 중복되지 않는지 확인합니다.
 
-공식 참고: https://developer.chrome.com/docs/webstore/publish · https://developer.chrome.com/docs/webstore/images · https://developer.chrome.com/docs/webstore/cws-dashboard-privacy
+공식 참고: [게시 절차](https://developer.chrome.com/docs/webstore/publish) · [이미지 규격](https://developer.chrome.com/docs/webstore/images) · [개인정보 탭](https://developer.chrome.com/docs/webstore/cws-dashboard-privacy)
