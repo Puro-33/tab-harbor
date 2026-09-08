@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tab Harbor · 탭 보관함</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="popup.js"></script>
+</head>
+<body class="popup-body">
+  <main class="popup-shell">
+    <header class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="5" y="7" width="22" height="25" rx="5" fill="currentColor" opacity=".2"/><path d="M15 12h16a4 4 0 0 1 4 4v17H11V16a4 4 0 0 1 4-4Z" fill="currentColor"/><path d="M18 21v6m-3-3 3 3 3-3M26 21h4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div><strong>Tab Harbor</strong><span>탭 보관함</span></div>
+    </header>
+    <section class="popup-intro">
+      <h1>탭을 쉬게 해 주세요.</h1>
+      <p>지금 열어 둔 페이지, 나중에 한 번에 이어서.</p>
+    </section>
+    <form id="capture-form">
+      <label class="field-label" for="capture-title">묶음 이름 <span class="optional">선택</span></label>
+      <input id="capture-title" name="title" maxlength="240" placeholder="예: 내일 이어볼 자료" autocomplete="off">
+      <label class="checkbox-label"><input id="close-after-save" type="checkbox"><span>저장 후 탭 닫기</span></label>
+      <p class="field-hint">URL과 제목을 저장합니다. URL의 검색어나 주소 매개변수도 포함됩니다. 입력한 내용, 로그인 상태, 스크롤 위치는 복원되지 않습니다.</p>
+      <div class="privacy-note"><span class="privacy-dot" aria-hidden="true"></span><p>이 Chrome 프로필의 로컬 DB에 보관하며<br>외부로 전송하지 않습니다.</p></div>
+      <div class="popup-actions">
+        <button class="button button-primary" type="submit" name="scope" value="window">이 창의 탭 저장</button>
+        <button class="button button-secondary" type="submit" name="scope" value="tab">현재 탭만 저장</button>
+      </div>
+    </form>
+    <p id="popup-feedback" class="feedback" role="status" aria-live="polite" hidden></p>
+    <footer class="popup-footer"><span id="waiting-count">나중에 이어갈 곳</span><button id="open-library" class="text-button" type="button">보관함 열기 <span aria-hidden="true">↗</span></button></footer>
+  </main>
+</body>
+</html>

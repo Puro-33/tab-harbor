@@ -1,0 +1,19 @@
+{
+  "name": "tab-harbor",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A local database for saving and reopening Chrome tab sessions.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test",
+    "check": "node scripts/check-package.mjs",
+    "package": "node scripts/package.mjs"
+  },
+  "devDependencies": {
+    "fake-indexeddb": "^6.0.0",
+    "jsdom": "^30.0.1"
+  }
+}

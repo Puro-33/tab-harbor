@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Harbor - 탭 보관함",
+  "version": "0.1.0",
+  "description": "탭과 URL을 대기 목록에 저장하고 필요할 때 다시 여세요. 검색과 JSON 백업을 지원하는 로컬 탭 보관함입니다.",
+  "permissions": ["tabs"],
+  "incognito": "not_allowed",
+  "background": { "service_worker": "background.js", "type": "module" },
+  "action": {
+    "default_title": "Tab Harbor · 탭 보관함",
+    "default_popup": "popup.html",
+    "default_icon": { "16": "icons/icon-16.png", "32": "icons/icon-32.png", "48": "icons/icon-48.png", "128": "icons/icon-128.png" }
+  },
+  "icons": { "16": "icons/icon-16.png", "32": "icons/icon-32.png", "48": "icons/icon-48.png", "128": "icons/icon-128.png" },
+  "options_ui": { "page": "dashboard.html", "open_in_tab": true },
+  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'self'; base-uri 'none'" }
+}

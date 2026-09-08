@@ -1,0 +1,2 @@
+# Development only. Generated PNGs are committed; the extension has no Python runtime.
+Pillow>=10,<13

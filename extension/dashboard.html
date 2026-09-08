@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>보관함 · Tab Harbor</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="dashboard.js"></script>
+</head>
+<body class="dashboard-body">
+  <a class="skip-link" href="#library-content">보관함으로 바로 가기</a>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="보관함 메뉴">
+      <a class="brand brand-link" href="dashboard.html" aria-label="Tab Harbor 보관함 처음으로">
+        <svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect x="5" y="7" width="22" height="25" rx="5" fill="currentColor" opacity=".2"/><path d="M15 12h16a4 4 0 0 1 4 4v17H11V16a4 4 0 0 1 4-4Z" fill="currentColor"/><path d="M18 21v6m-3-3 3 3 3-3M26 21h4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div><strong>Tab Harbor</strong><span>탭 보관함</span></div>
+      </a>
+      <nav class="library-nav" aria-label="묶음 상태">
+        <button class="nav-item is-active" data-filter="waiting" type="button" aria-current="page"><span class="nav-icon" aria-hidden="true">◷</span><span>대기 중</span><span class="nav-count" data-count="waiting">0</span></button>
+        <button class="nav-item" data-filter="restored" type="button"><span class="nav-icon" aria-hidden="true">↗</span><span>다시 연 기록</span><span class="nav-count" data-count="restored">0</span></button>
+        <button class="nav-item" data-filter="archived" type="button"><span class="nav-icon" aria-hidden="true">▤</span><span>보관 처리</span><span class="nav-count" data-count="archived">0</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="backup-actions"><button id="export-backup" class="sidebar-action" type="button"><span aria-hidden="true">↓</span> 백업 내보내기</button><button id="import-backup" class="sidebar-action" type="button"><span aria-hidden="true">↑</span> 백업 가져오기</button><input id="import-file" type="file" accept=".json,application/json" hidden></div>
+        <p class="backup-hint">백업 파일에는 저장한 URL이 포함됩니다.<br>파일은 직접 안전하게 보관해 주세요.</p>
+        <div class="local-badge"><span class="privacy-dot" aria-hidden="true"></span> 이 Chrome에만 저장됨</div>
+        <p class="local-hint">외부 전송 없음<br>확장 프로그램을 삭제하면 보관함도 지워집니다.</p>
+      </div>
+    </aside>
+    <main id="library-content" class="library-main" tabindex="-1">
+      <header class="library-header">
+        <div><p class="header-context">페이지는 보관하고, 화면은 가볍게.</p><h1 id="view-title">다음에 이어갈 곳.</h1><p id="view-description" class="view-description">잠시 내려놓은 탭을 여기에서 다시 만나세요.</p></div>
+        <button id="capture-window" class="button button-primary" type="button"><span aria-hidden="true">＋</span> 현재 창 저장</button>
+      </header>
+      <div class="library-toolbar"><label class="search-field"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span class="sr-only">묶음, 페이지 제목, URL, 도메인, 태그 검색</span><input id="search" type="search" placeholder="제목, 사이트, 태그로 찾아보세요" autocomplete="off"></label><label class="sort-field"><span class="sr-only">정렬</span><select id="sort"><option value="newest">최근 저장순</option><option value="oldest">오래된 순</option><option value="title">이름순</option></select></label></div>
+      <p id="dashboard-feedback" class="feedback" role="status" aria-live="polite" hidden></p>
+      <div class="list-heading"><p id="result-summary" aria-live="polite">보관함을 불러오는 중…</p><button id="refresh-library" class="text-button" type="button">새로고침</button></div>
+      <section id="session-list" class="session-list" aria-label="저장한 탭 묶음" aria-busy="true"></section>
+      <section id="empty-state" class="empty-state" hidden>
+        <div class="empty-tabs" aria-hidden="true"><span class="empty-tab empty-tab-back"></span><span class="empty-tab empty-tab-front"><span></span><span></span><span></span></span></div>
+        <h2 id="empty-title">열어 둔 탭에 잠깐의 쉼을.</h2><p id="empty-description">Chrome 도구 모음에서 Tab Harbor를 열고<br>현재 탭이나 이 창의 탭을 저장해 보세요.</p><button id="empty-capture" class="button button-primary" type="button">현재 창의 탭 저장하기</button>
+      </section>
+      <p class="library-footnote">URL과 제목을 보관합니다. 입력한 내용, 로그인 상태, 스크롤 위치는 복원되지 않습니다.</p>
+    </main>
+  </div>
+  <dialog id="session-dialog" class="session-dialog" aria-labelledby="detail-heading">
+    <div class="dialog-shell"><header class="dialog-header"><div><p id="detail-meta" class="detail-meta"></p><h2 id="detail-heading">묶음 살펴보기</h2></div><button id="close-detail" class="icon-button" type="button" aria-label="상세 화면 닫기">×</button></header>
+      <form id="edit-form" class="edit-form">
+        <label class="field-label" for="edit-title">묶음 이름</label><input id="edit-title" maxlength="240" required>
+        <div class="edit-grid"><div><label class="field-label" for="edit-note">메모 <span class="optional">선택</span></label><textarea id="edit-note" maxlength="10000" rows="3" placeholder="어디까지 봤는지 남겨 두세요"></textarea></div><div><label class="field-label" for="edit-tags">태그 <span class="optional">쉼표로 구분</span></label><input id="edit-tags" maxlength="1238" placeholder="예: 업무, 읽을거리"><p class="field-hint">최대 20개, 각 60자까지. 검색할 때 함께 찾을 수 있어요.</p></div></div>
+        <div class="edit-save"><button class="button button-secondary button-small" type="submit">변경 저장</button></div>
+      </form>
+      <p id="detail-feedback" class="feedback" role="status" aria-live="polite" hidden></p>
+      <div class="detail-tabs-heading"><h3 id="detail-tab-count">저장한 탭</h3><button id="restore-all" class="button button-primary button-small" type="button">모두 새 창에서 열기</button></div>
+      <ul id="detail-tabs" class="detail-tabs"></ul>
+      <p class="field-hint restore-hint">다시 열어도 저장한 URL은 남습니다. 페이지의 현재 주소로 이동하며 이전 화면 상태는 복원되지 않습니다.</p>
+      <footer class="dialog-footer"><div><button id="move-waiting" class="text-button" type="button">대기로 되돌리기</button><button id="move-archived" class="text-button" type="button">보관 처리</button></div><button id="delete-session" class="text-button danger-text" type="button">묶음 삭제</button></footer>
+    </div>
+  </dialog>
+</body>
+</html>
